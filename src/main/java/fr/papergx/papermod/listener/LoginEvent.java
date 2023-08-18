@@ -20,7 +20,7 @@ public class LoginEvent implements Listener {
         File file = new File(plugin.getDataFolder(), "data/Ban.yml");
         YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
         Player player = event.getPlayer();
-        if(configuration.get(player.getName()) != null) {
+        if(configuration.get(player.getName().toLowerCase()) != null) {
             event.setResult(PlayerLoginEvent.Result.KICK_BANNED);
             event.setKickMessage("§e§lBannissement §7§l➛ §6Tu es bannis pour la raison: §e" + configuration.get(player.getName()));
         }

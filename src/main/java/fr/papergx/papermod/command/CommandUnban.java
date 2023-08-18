@@ -30,11 +30,12 @@ public class CommandUnban implements CommandExecutor {
         }
         File file = new File(plugin.getDataFolder(), "data/Ban.yml");
         YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
-        if(!configuration.contains(args[0])) {
+        if(!configuration.contains(args[0].toLowerCase())) {
             player.sendMessage("§c[✘] Le joueurs n'est pas banni !");
             return false;
         }
         configuration.set(args[0], null);
+        player.sendMessage("§e[§2✔§e] Tu viens de débannir le joueur");
         try {
             configuration.save(file);
         } catch (IOException e) {

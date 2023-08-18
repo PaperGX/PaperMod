@@ -40,12 +40,14 @@ public class BannissementGUI extends GUI<Main> {
                 .setName("§7§l➛ §e§lPseudo Incorrect")
                 .setLore("§7Durée: Définitif")
                 .toItemStack(), (player, clickedItem) -> {
+            new Ban(player, target, plugin, "Pseudo Incorrecte");
             return ButtonAction.CLOSE_GUI;
         });
         set(15, new ItemBuilder(Material.ENCHANTED_BOOK)
                 .setName("§7§l➛ §e§lMenace DDOS/DOX")
                 .setLore("§7Durée: Définitif (BL)")
                 .toItemStack(), (player, clickedItem) -> {
+            new Ban(player, target, plugin, "DDOS/DOX");
             return ButtonAction.CLOSE_GUI;
         });
         set(16, new ItemBuilder(Material.ENCHANTED_BOOK)
@@ -58,6 +60,7 @@ public class BannissementGUI extends GUI<Main> {
                 .setName("§7§l➛ §e§lMenace (Mort) / Propos Racite...")
                 .setLore("§7Durée: 7j")
                 .toItemStack(), (player, clickedItem) -> {
+            new Ban(player, target, plugin, "Menace (Mort) / Propos Racite...");
             return ButtonAction.CLOSE_GUI;
         });
 

@@ -1,0 +1,9 @@
+name: PaperMod
+author: PaperGX
+version: 1.0
+main: fr.papergx.papermod.Main
+commands:
+  staff:
+    description: Passage en mode staff
+  unban:
+    description: Unban un joueur

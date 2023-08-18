@@ -22,7 +22,7 @@ public class LoginEvent implements Listener {
         Player player = event.getPlayer();
         if(configuration.get(player.getName().toLowerCase()) != null) {
             event.setResult(PlayerLoginEvent.Result.KICK_BANNED);
-            event.setKickMessage("§e§lBannissement §7§l➛ §6Tu es bannis pour la raison: §e" + configuration.get(player.getName()));
+            event.setKickMessage("§e§lBannissement §7§l➛ §6Tu es bannis pour la raison: §e" + configuration.get(player.getName().toLowerCase()));
         }
     }
 }

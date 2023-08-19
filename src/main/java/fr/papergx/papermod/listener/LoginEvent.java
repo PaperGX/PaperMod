@@ -8,6 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
 
 public class LoginEvent implements Listener {
     private Main plugin;
@@ -16,13 +18,12 @@ public class LoginEvent implements Listener {
     }
 
     @EventHandler
-    public void ee(PlayerLoginEvent event) {
-        File file = new File(plugin.getDataFolder(), "data/Ban.yml");
-        YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+    public void PlayerLoginEvent(PlayerLoginEvent event) {
         Player player = event.getPlayer();
-        if(configuration.get(player.getName().toLowerCase()) != null) {
+        HashMap<String, List<Object>> getBans = Main.getBans();
+        if(getBans.containsKey(player.getName())) {
             event.setResult(PlayerLoginEvent.Result.KICK_BANNED);
-            event.setKickMessage("§e§lBannissement §7§l➛ §6Tu es bannis pour la raison: §e" + configuration.get(player.getName().toLowerCase()));
+            event.setKickMessage("§e§lBannissement §7§l➛ §e§lTu es bannis du serveur de façon définitive pour la raison: §6§l" + getBans.get(player.getName()).get(0));
         }
     }
 }

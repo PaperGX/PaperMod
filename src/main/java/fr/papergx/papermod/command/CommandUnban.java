@@ -1,6 +1,9 @@
 package fr.papergx.papermod.command;
 
 import fr.papergx.papermod.Main;
+import fr.papergx.papermod.sql.RequestManager;
+import fr.papergx.papermod.sql.enums.REQUEST_TYPE;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -9,6 +12,8 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 
 public class CommandUnban implements CommandExecutor {
     private Main plugin;
@@ -28,19 +33,12 @@ public class CommandUnban implements CommandExecutor {
             player.sendMessage("§c[✘] Erreur: /unban (pseudo)");
             return false;
         }
-        File file = new File(plugin.getDataFolder(), "data/Ban.yml");
-        YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
-        if(!configuration.contains(args[0].toLowerCase())) {
-            player.sendMessage("§c[✘] Le joueurs n'est pas banni !");
+        HashMap<String, List<Object>> listBans = Main.getBans();
+        if (!listBans.containsKey(args[0])) {
+            player.sendMessage("§c[✘] Le joueur n'est pas banni !");
             return false;
         }
-        configuration.set(args[0], null);
-        player.sendMessage("§e[§2✔§e] Tu viens de débannir le joueur");
-        try {
-            configuration.save(file);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        RequestManager.removeBan(REQUEST_TYPE.BAN, args[0]);
         return false;
     }
 }
